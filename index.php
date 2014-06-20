@@ -1,12 +1,17 @@
-﻿<!DOCTYPE html>
+﻿<?php
+	session_save_path('./session/');
+	session_start();
+	$_SESSION['view']=1;
+?>
+
+<!--DOCTYPE html-->
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <script src="/js/jquery.js"></script>
     <title>Noods</title>
     </head>
     <body>
-        <a href='./login.php'>link</a>
+		<?php echo "View=".$_SESSION['view']; ?>
 		<form action='login.php' method='post'>
 			<label> 帳號: </label>
 			<input type='text' name='username' id='username'><br>
