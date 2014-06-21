@@ -1,12 +1,13 @@
 <?php
-    include('config.php');
+    include_once('config.php');
     session_save_path('./session');
     session_start();
+    $_SESSION['access']=false;
 ?>
 
 <?php
     
-    if(isset($_SESSION['validated'])) {
+    if($_POST['username']!=null && $_POST['password']!=null) {
 
         $index_username=$_POST['username'];
         $index_password=$_POST['password'];
@@ -28,6 +29,7 @@
         }*/
         if(mysqli_stmt_num_rows($stmt)==1){
             echo "Welcome!!!" . "<br>" . "Redirecting...";
+            $_SESSION['access']=true;
             mysqli_stmt_close($stmt);
             header('Refresh: 3; url=search.php');
         } else {
@@ -42,6 +44,6 @@
         header('Refresh: 5; url=index.php');
 
     }
-    
+
     mysqli_close($con);
 ?>

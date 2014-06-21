@@ -1,11 +1,4 @@
-﻿<?php
-	session_save_path('./session');
-	session_start();
-    $_SESSION['validated']=true;
-    session_write_close();
-?>
-
-<html>
+﻿<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Noods</title>
