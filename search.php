@@ -1,4 +1,5 @@
 ﻿<?php
+    include_once('config.php');
     session_save_path('./session');
     session_start();
 ?>

@@ -4,12 +4,12 @@
     <title>Noods</title>
     </head>
     <body>
-		<form action='login.php' method='post'>
-			<label> 帳號: </label>
-			<input type='text' name='username' id='username'><br>
-			<label> 密碼: </label>
-			<input type='password' name='password' id='password'><br>
-			<input type='submit' value='登入'>
-		</form>
+        <form action='login.php' method='post'>
+            <label> 帳號: </label>
+            <input type='text' name='username' id='username'><br>
+            <label> 密碼: </label>
+            <input type='password' name='password' id='password'><br>
+            <input type='submit' value='登入'>
+        </form>
     </body>
 </html>

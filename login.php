@@ -46,14 +46,14 @@
             }
             
         } else {
-            echo "password error". "<br>" . "Redirecting...";
+            echo "Password error.". "<br>" . "Redirecting...";
             header('Refresh: 3; url=index.php');
         }
         
     } else {
     
-        echo "Permission Not Enough!";
-        header('Refresh: 5; url=index.php');
+        echo "You shall not pass!";
+        header('Refresh: 3; url=index.php');
 
     }
 
