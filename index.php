@@ -1,17 +1,16 @@
 ﻿<?php
-	session_save_path('./session/');
+	session_save_path('./session');
 	session_start();
-	$_SESSION['view']=1;
+    $_SESSION['validated']=true;
+    session_write_close();
 ?>
 
-<!--DOCTYPE html-->
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Noods</title>
     </head>
     <body>
-		<?php echo "View=".$_SESSION['view']; ?>
 		<form action='login.php' method='post'>
 			<label> 帳號: </label>
 			<input type='text' name='username' id='username'><br>
