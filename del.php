@@ -6,16 +6,16 @@
 	if(isset($_SESSION['admin']) && $_SESSION['admin']==true) {
 		echo "delete!";
 		$del_orderid=$_GET['id'];
-        $stmt = mysqli_prepare($con,"DELETE FROM `Order` WHERE `orderID` = ?");
-        mysqli_stmt_bind_param($stmt,'s',$del_orderid);
-        mysqli_stmt_execute($stmt);
-        mysqli_close($con);
-		header('url=delorder.php');
+		$stmt = mysqli_prepare($con,"DELETE FROM `Order` WHERE `orderID` = ?");
+		mysqli_stmt_bind_param($stmt,'s',$del_orderid);
+		mysqli_stmt_execute($stmt);
+		mysqli_close($con);
+		header('Refresh: 1; url=delorder.php');
 	}
 	else{
-        echo "You shall not pass!";
-        mysqli_close($con);
-        header('Refresh: 3; url=index.php');
+		echo "You shall not pass!";
+		mysqli_close($con);
+		header('Refresh: 3; url=index.php');
     }
 	
 
