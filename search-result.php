@@ -5,7 +5,7 @@
 
     if(isset($_SESSION['access']) && $_SESSION['access']==true) {
         $search_shopName=$_POST['shopName'];
-        $stmt = mysqli_prepare($con,"SELECT `Order`.* FROM `Order`,`Shop` WHERE `shopName` = ?");
+        $stmt = mysqli_prepare($con,"SELECT `Order`.* FROM `Order` NATURAL JOIN `Shop` WHERE `shopName` = ?");
         mysqli_stmt_bind_param($stmt,'s',$search_shopName);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
