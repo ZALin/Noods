@@ -1,9 +1,9 @@
-<?php
+﻿<?php
 	include_once('config.php');
 	session_save_path('./session');
 	session_start();
 	
-	if(isset($_SESSION['admin']) && $_SESSION['admin']==true) {
+	if(isset($_SESSION['permission']) && $_SESSION['permission']=='admin') {
 		echo "delete!";
 		$del_orderid=$_GET['id'];
 		$stmt = mysqli_prepare($con,"DELETE FROM `Order` WHERE `orderID` = ?");

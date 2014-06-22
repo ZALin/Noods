@@ -33,7 +33,7 @@
         }
                 
         echo "</table><br>";
-        if($_SESSION['admin']==true) {
+        if($_SESSION['permission']=='admin') {
             echo "<a href='admin.php'>back to main page</a>";
         } else {
             echo "<a href='user.php'>back to main page</a>";

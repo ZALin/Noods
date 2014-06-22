@@ -4,7 +4,6 @@
     session_start();
 
     if(isset($_SESSION['access']) && $_SESSION['access']==true) {
-        $_SESSION['admin']=true;
 
         echo "<html>
                 <head>
