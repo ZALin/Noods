@@ -1,7 +1,7 @@
 <?php
 	include_once('config.php');
-    session_save_path('./session');
-    session_start();
+	session_save_path('./session');
+	session_start();
 	
 	if(isset($_SESSION['admin']) && $_SESSION['admin']==true) {
 		echo "delete!";
@@ -16,7 +16,7 @@
 		echo "You shall not pass!";
 		mysqli_close($con);
 		header('Refresh: 3; url=index.php');
-    }
+	}
 	
 
 
