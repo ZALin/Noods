@@ -4,9 +4,8 @@
     session_start();
 
     if(isset($_SESSION['access']) && $_SESSION['access']==true) {
-        $search_shopName=$_POST['shopName'];
-        $stmt = mysqli_prepare($con,"SELECT `Order`.* FROM `Order`,`Shop` WHERE `shopName` = ?");
-        mysqli_stmt_bind_param($stmt,'s',$search_shopName);
+
+        $stmt = mysqli_prepare($con,"SELECT * FROM `Order`");
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $res_orderID ,$res_orderDate ,$res_shopID ,$res_totalCost);
@@ -33,6 +32,7 @@
         }
                 
         echo "</table><br>";
+
         if($_SESSION['admin']==true) {
             echo "<a href='admin.php'>back to main page</a>";
         } else {

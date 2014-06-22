@@ -4,11 +4,12 @@
     session_start();
 
     if(isset($_SESSION['access']) && $_SESSION['access']==true) {
+
         echo "<html>
                 <head>
-                    <meta http-equiv=\"Content-Type\" content=\"charset=utf-8\">
+                    <meta http-equiv='Content-Type' content='charset=utf-8'>
                     <title>Noods - Search Page</title>
-                    <link rel=\"stylesheet\" type=\"text/css\" href=\"css/search.css\">
+                    <link rel='stylesheet' type='text/css' href='css/search.css'>
                 </head>
                 <body>
                      <form action='search-result.php' method='post'>
@@ -27,7 +28,7 @@
         echo "           </select><br>";
         echo "<input type='submit' value='查詢'>";
 
-        echo "       </form><br>"
+        echo "       </form><br>";
 
         if($_SESSION['admin']==true) {
             echo "<a href='admin.php'>back to main page</a>";
