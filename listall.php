@@ -5,13 +5,15 @@
 
     if(isset($_SESSION['access']) && $_SESSION['access']==true) {
         
+
+
         if($_SESSION['permission'] == 'admin') {
             $stmt = mysqli_prepare($con,"SELECT * FROM `Order`");
         } else {
             $stmt = mysqli_prepare($con,"SELECT * FROM `Order` WHERE `shopID` = ?");
             mysqli_stmt_bind_param($stmt,'i',$_SESSION['shopID']);
-            
         }
+
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $res_orderID ,$res_orderDate ,$res_shopID ,$res_totalCost);
@@ -24,6 +26,12 @@
             echo "<td>shopID</td>";
         }
         echo "<td>總金額</td>";
+        if($_GET['func'] == 'modify') {
+            echo "<td>修改</td>";
+        }
+        if($_GET['func'] == 'delete') {
+            echo "<td>刪除</td>";
+        }
         echo "</tr>";
         while(mysqli_stmt_fetch($stmt)) {
 
@@ -34,6 +42,15 @@
                 echo "<td>".$res_shopID."</td>";
             }
             echo "<td>".$res_totalCost."</td>";
+
+            if($_GET['func'] == 'modify') {
+                echo "<td><a href='update.php?id=".$res_orderID."'>修改</a></td>";
+            }
+
+            if($_GET['func'] == 'delete') {
+                echo "<td><a href='delorder-result.php?id=".$res_orderID."'>刪除</a></td>";
+            }
+
             echo "</tr>";
         }
                 
