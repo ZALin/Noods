@@ -17,7 +17,7 @@
                           <li><a href='add-shop.php'>新增店家</a></li>
                           <li><a href='search.php'>查詢店家訂單</a></li>
                           <li><a href='listall.php'>列出所有訂單</a></li>
-                          <li>修改訂單</li>
+                          <li><a href='updateorder.php'>修改訂單</a></li>
                           <li><a href='delorder.php'>刪除訂單</a></li>
                         </ul>
                     </div>
