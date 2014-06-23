@@ -31,7 +31,7 @@
 			echo "<td><a href='UpdatePage.php?id=".$res_orderID."'>修改</a></td>";
 			echo "</tr>";
 		}
-                
+				
 		echo "</table><br>";
 
 		if($_SESSION['permission']=='admin') {

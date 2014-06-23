@@ -37,7 +37,7 @@
 			}
 			echo "<td>".$res_totalCost."</td>";
 			echo "</tr>";
-		}      
+		}	  
 		echo "</table><br>";
 		
 		$stmt = mysqli_prepare($con,"SELECT * FROM `Subscribe` NATURAL JOIN `Product` WHERE `orderID` = ?");
@@ -64,7 +64,7 @@
 			echo "<td>".$res_productCost."</td>";
 			echo "<td> <form action='upd.php' method='post'> <input type='text' value=".$res_pruductNum." name='num' ><input type='hidden' value=".$upd_orderid." name='oid' ><input type='hidden' value=".$res_productID." name='pid' > <input type='submit' value='修改'></form> </td>";
 			echo "</tr>";
-		}      
+		}	  
 		echo "</table><br>";
 		
 		
