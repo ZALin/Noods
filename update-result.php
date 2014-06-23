@@ -24,7 +24,6 @@
         $stmt = mysqli_prepare($con,"UPDATE `Order` SET `totalCost` = ? WHERE `orderID` = ? ");
         mysqli_stmt_bind_param($stmt,'ss',$total_cost, $order_id);
         mysqli_stmt_execute($stmt);
-        
         echo "Update!";
         mysqli_close($con);
         header("Refresh: 1; url=updateorder.php");
