@@ -4,8 +4,14 @@
     session_start();
 
     if(isset($_SESSION['access']) && $_SESSION['access']==true) {
-
-        $stmt = mysqli_prepare($con,"SELECT * FROM `Order`");
+        
+        if($_SESSION['permission'] == 'admin') {
+            $stmt = mysqli_prepare($con,"SELECT * FROM `Order`");
+        } else {
+            $stmt = mysqli_prepare($con,"SELECT * FROM `Order` WHERE `shopID` = ?");
+            mysqli_stmt_bind_param($stmt,'i',$_SESSION['shopID']);
+            
+        }
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $res_orderID ,$res_orderDate ,$res_shopID ,$res_totalCost);
@@ -14,7 +20,7 @@
         echo "<tr>";
         echo "<td>訂單ID</td>";
         echo "<td>訂單日期</td>";
-        if($_SESSION['admin']==true) {
+        if($_SESSION['permission'] == 'admin') {
             echo "<td>shopID</td>";
         }
         echo "<td>總金額</td>";
@@ -24,7 +30,7 @@
             echo "<tr>";
             echo "<td>".$res_orderID."</td>";
             echo "<td>".$res_orderDate."</td>";
-            if($_SESSION['admin']==true) {
+            if($_SESSION['permission'] == 'admin') {
                 echo "<td>".$res_shopID."</td>";
             }
             echo "<td>".$res_totalCost."</td>";

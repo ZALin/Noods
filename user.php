@@ -15,8 +15,7 @@
                     <div id='functions'>
                         <ul>
                           <li><a href='add-order.php'>新增訂單</a></li>
-                          <li><a href='search.php'>查詢店家訂單</a></li>
-                          <li><a href='listall.php'>列出所有訂單</a></li>
+                          <li><a href='listall.php'>列出本店訂單</a></li>
                           <li>修改訂單</li>
                           <li>刪除訂單</li>
                         </ul>
