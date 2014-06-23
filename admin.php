@@ -14,7 +14,7 @@
                 <body>
                     <div id='functions'>
                         <ul>
-                          <li>新增店家</li>
+                          <li><a href='add-shop.php'>新增店家</a></li>
                           <li><a href='search.php'>查詢店家訂單</a></li>
                           <li><a href='listall.php'>列出所有訂單</a></li>
                           <li><a href='updateorder.php'>修改訂單</a></li>
@@ -28,6 +28,6 @@
     } else {
         echo "You shall not pass!";
         mysqli_close($con);
-        header('Refresh: 3; url=index.php');
+        header('Refresh: 2; url=index.php');
     }
 ?>

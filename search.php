@@ -43,6 +43,6 @@
     } else {
         echo "You shall not pass!";
         mysqli_close($con);
-        header('Refresh: 3; url=index.php');
+        header('Refresh: 2; url=index.php');
     }
 ?>
