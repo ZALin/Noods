@@ -1,13 +1,7 @@
 ﻿<?php
-    include_once('config.php');
     session_save_path('./session');
     session_start();
-    $_SESSION['access']=false;
-?>
-
-<?php
-    
-    
-
-    mysqli_close($con);
+    session_destroy();
+    echo "See you.". "<br>" . "Redirecting...";
+    header('Refresh: 1; url=index.php');
 ?>
