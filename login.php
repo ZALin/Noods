@@ -16,16 +16,20 @@
         mysqli_stmt_bind_param($stmt,'ss',$index_username,$index_password);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
-        mysqli_stmt_bind_result($stmt, $res_username, $res_password, $res_permission);
+        mysqli_stmt_bind_result($stmt, $res_username, $res_password, $res_permission, $res_shopID);
 
 
         if(mysqli_stmt_num_rows($stmt)==1) {
 
-            echo "Welcome!!!" . "<br>" . "Redirecting...";
+            echo "Welcome!!!" . "<br>" . "Redirecting... <br> ";
+
             $_SESSION['access']=true;
-            $_SESSION['username']=$res_username;
-            $_SESSION['password']=$res_password;
-            $_SESSION['permission']=$res_permission;
+            while (mysqli_stmt_fetch($stmt)) {
+                $_SESSION['username']=$res_username;
+                $_SESSION['password']=$res_password;
+                $_SESSION['permission']=$res_permission;
+                $_SESSION['shopID']=$res_shopID;
+            }
             mysqli_stmt_close($stmt);
             
             if ($res_permission == 'admin') {
