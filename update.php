@@ -1,8 +1,48 @@
 <?php
     include_once('config.php');
+?>
+
+<head>
+<?php
+        echo "<script>";
+        echo "var first=true;";
+        echo "function add_new_data() { ";
+        echo "  if(first) {";
+        echo "      var obj = document.getElementById('newform'); ";
+        echo "      new_element = document.createElement('select'); ";
+        echo "      new_element.setAttribute('name','productClass'); ";
+        echo "      new_element.setAttribute('onChange','ReNew(this.selectedIndex);'); ";
+        echo "      obj.appendChild(new_element); ";
+        $stmt = mysqli_prepare($con,"SELECT DISTINCT productClass FROM `Product`");
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+        mysqli_stmt_bind_result($stmt, $res_productClass);
+        while(mysqli_stmt_fetch($stmt)) {
+            echo "var new_option = new Option('".$res_productClass."','".$res_productClass."'); "; 
+            echo "new_element.options.add(new_option); ";
+        }
+        echo "      new_element = document.createElement('select'); ";
+        echo "      new_element.setAttribute('name','productName'); ";
+        echo "      obj.appendChild(new_element); ";      
+        echo "      new_element = document.createElement('input'); ";
+        echo "      new_element.setAttribute('name','productNum'); ";
+        echo "      obj.appendChild(new_element); ";      
+        echo "      new_element = document.createElement('input');";
+        echo "      new_element.setAttribute('type','submit');";
+        echo "      new_element.setAttribute('value','新增');";
+        echo "      obj.appendChild(new_element);";
+        echo "      first = false; ";
+        echo "  } ";
+        echo "}";
+        echo "</script> ";
+?>
+</head>
+<body>
+<?php
+
     session_save_path('./session');
     session_start();
-
+    
     if(isset($_SESSION['access']) && $_SESSION['access']==true) {
         $upd_orderid=$_GET['id'];
         $stmt = mysqli_prepare($con,"SELECT * FROM `Order` WHERE `orderID` = ?");
@@ -45,11 +85,9 @@
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $res_productID, $res_subscribeID, $res_orderID, $res_pruductNum, $res_productClass, $res_productName, $res_productCost);
-        
-        // `Subscribe` should not have subscribeID in our design
 
-        
-        echo "<table>";
+        // `Subscribe` should not have subscribeID in our design
+        echo "<table id='updatetable'>";
         echo "<tr>";
         echo "<th>類別</th>"; 
         echo "<th>名稱</th>";
@@ -68,6 +106,11 @@
         echo "</table><br>";
         
         
+ 
+        echo "<input type='submit' value='新增物品' onclick='add_new_data();'>";
+        echo "<form id='newform' action='add-sub-result.php' method='post'>";
+        echo "</form>";
+        
         if($_SESSION['permission']=='admin') {
             echo "<a href='admin.php'>back to main page</a>";
         } else {
@@ -81,3 +124,4 @@
         header('Refresh: 3; url=index.php');
     }
 ?>
+</body>
