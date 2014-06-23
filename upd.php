@@ -4,16 +4,16 @@
     session_start();
     
     if(isset($_SESSION['permission']) && $_SESSION['permission']=='admin') {
-        $oid=$_POST['oid'];
-        $pid=$_POST['pid'];
-        $num=$_POST['num'];
+        $order_id=$_POST['oid'];
+        $product_id=$_POST['pid'];
+        $product_num=$_POST['num'];
         $stmt = mysqli_prepare($con,"UPDATE `Subscribe` SET `productNum` = ? WHERE `orderID` = ? AND `productID` = ?");
-        mysqli_stmt_bind_param($stmt,'sss',$num, $oid, $pid);
+        mysqli_stmt_bind_param($stmt,'sss',$product_num, $order_id, $product_id);
         mysqli_stmt_execute($stmt);
         
         //calculate totalCost
         $stmt = mysqli_prepare($con,"SELECT * FROM `Subscribe` NATURAL JOIN `Product` WHERE `orderID` = ?");
-        mysqli_stmt_bind_param($stmt,'s',$oid);
+        mysqli_stmt_bind_param($stmt,'s',$order_id);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $res_productID, $res_subscribeID, $res_orderID, $res_pruductNum, $res_productClass, $res_productName, $res_productCost);
@@ -22,7 +22,7 @@
             $total_cost += $res_pruductNum*$res_productCost;
         }      
         $stmt = mysqli_prepare($con,"UPDATE `Order` SET `totalCost` = ? WHERE `orderID` = ? ");
-        mysqli_stmt_bind_param($stmt,'ss',$total_cost, $oid);
+        mysqli_stmt_bind_param($stmt,'ss',$total_cost, $order_id);
         mysqli_stmt_execute($stmt);
         
         echo "Update!";
