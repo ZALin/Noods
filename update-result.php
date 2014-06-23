@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     include_once('config.php');
     session_save_path('./session');
     session_start();
@@ -17,10 +17,13 @@
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $res_productID, $res_subscribeID, $res_orderID, $res_pruductNum, $res_productClass, $res_productName, $res_productCost);
+
         $total_cost = 0;
         while(mysqli_stmt_fetch($stmt)) {
             $total_cost += $res_pruductNum*$res_productCost;
-        }      
+        }
+        //END calculate totalCost
+        
         $stmt = mysqli_prepare($con,"UPDATE `Order` SET `totalCost` = ? WHERE `orderID` = ? ");
         mysqli_stmt_bind_param($stmt,'ss',$total_cost, $order_id);
         mysqli_stmt_execute($stmt);
