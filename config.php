@@ -1,5 +1,6 @@
 ﻿<?php
-    $con = mysqli_connect("sql5.freesqldatabase.com","sql544303","eT2*wK6*","sql544303");
+    $db_name="sql544303";
+    $con = mysqli_connect("sql5.freesqldatabase.com","sql544303","eT2*wK6*",$db_name);
     mysqli_set_charset($con,"utf8");
 
     // Check connection
