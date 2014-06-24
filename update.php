@@ -127,6 +127,7 @@
 input[type='number']{
     padding: 0px;
     margin: 0px;
+    margin-top:-5px;
     height:30px;
 }
 </style>
