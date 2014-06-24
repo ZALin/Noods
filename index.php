@@ -3,10 +3,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="css/index.css" rel="stylesheet" type="text/css">
     <title>Noods</title>
     </head>
     <body>
-    
+        <div id='loginpanel'>
             <form action='login.php' method='post' class='form-horizontal'>
                 <div class="control-group">
                     <label class="control-label" for="username"> 帳號: </label>
@@ -26,6 +27,6 @@
                     </div>
                 </div>
             </form>
-        
+        </div>
     </body>
 </html>
