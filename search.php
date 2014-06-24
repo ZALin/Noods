@@ -40,10 +40,13 @@ if($_SESSION['permission']=='admin') {
             </div>
         </div>";
 } 
-        echo "<form action='search-result.php' method='post'>
-                        <label> 店名： </label>";
+        echo "<form class='form-horizontal' action='search-result.php' method='post
+                <div class='control-group'>
+                        <label class='control-label' for='shopName'> 店名： </label>";
                         
-        echo "           <select name='shopName'>";
+        echo            "<div class='controls'>
+                            <select name='shopName'>
+                        ";
 
         $stmt = mysqli_prepare($con,"SELECT `shopName` FROM `Shop`");
         mysqli_stmt_execute($stmt);
@@ -53,8 +56,9 @@ if($_SESSION['permission']=='admin') {
             echo "<option value='".$res_shopName."'>".$res_shopName."</option>";
         }
 
-        echo "           </select><br>";
-        echo "<input type='submit' class='btn btn-primary' value='查詢'>";
+        echo "           </select></div> 
+                </div><br>";
+        echo "<div class='control-group'><label class='control-label'></label><div class='controls'><input type='submit' class='btn btn-primary' value='查詢'></div></div>";
 
         echo "       </form><br>";
         /*
