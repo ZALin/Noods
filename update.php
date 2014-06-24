@@ -66,7 +66,7 @@
             echo "<td>".$res_productName."</td>";
             echo "<td>".$res_productCost."</td>";
             echo "<td>
-                    <form action='upd.php' method='post'>
+                    <form action='update-result.php' method='post'>
                         <input type='text' value=".$res_pruductNum." name='num'>
                         <input type='hidden' value=".$upd_orderid." name='oid'>
                         <input type='hidden' value=".$res_productID." name='pid'>

@@ -3,7 +3,7 @@
     session_save_path('./session');
     session_start();
     
-    if(isset($_SESSION['permission']) && $_SESSION['permission']=='admin') {
+    if(isset($_SESSION['access']) && $_SESSION['access']==true) {
         $order_id=$_POST['oid'];
         $product_id=$_POST['pid'];
         $product_num=$_POST['num'];
@@ -12,7 +12,7 @@
         $upd_1=mysqli_stmt_execute($stmt);
         
         //calculate totalCost
-        $stmt = mysqli_prepare($con,"SELECT `pruductNum`,`productCost` FROM `Subscribe` NATURAL JOIN `Product` WHERE `orderID` = ?");
+        $stmt = mysqli_prepare($con,"SELECT `productNum`,`productCost` FROM `Subscribe` NATURAL JOIN `Product` WHERE `orderID` = ?");
         mysqli_stmt_bind_param($stmt,'s',$order_id);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
@@ -34,7 +34,7 @@
         }
         mysqli_stmt_close($stmt);
         mysqli_close($con);
-        header("Refresh: 1; url=updateorder.php");
+        header("Refresh: 1; url=update.php?id=".$order_id);
     }
     else{
         echo "You shall not pass!";
