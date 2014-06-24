@@ -84,6 +84,7 @@
             echo "<a href='user.php'>back to main page</a>";
         }
 
+        mysqli_stmt_close($stmt);
         mysqli_close($con);
     } else {
         echo "You shall not pass!";

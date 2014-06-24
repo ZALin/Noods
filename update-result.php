@@ -9,14 +9,14 @@
         $product_num=$_POST['num'];
         $stmt = mysqli_prepare($con,"UPDATE `Subscribe` SET `productNum` = ? WHERE `orderID` = ? AND `productID` = ?");
         mysqli_stmt_bind_param($stmt,'sss',$product_num, $order_id, $product_id);
-        mysqli_stmt_execute($stmt);
+        $mysqli_stmt_execute($stmt);
         
         //calculate totalCost
-        $stmt = mysqli_prepare($con,"SELECT * FROM `Subscribe` NATURAL JOIN `Product` WHERE `orderID` = ?");
+        $stmt = mysqli_prepare($con,"SELECT `pruductNum`,`productCost` FROM `Subscribe` NATURAL JOIN `Product` WHERE `orderID` = ?");
         mysqli_stmt_bind_param($stmt,'s',$order_id);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
-        mysqli_stmt_bind_result($stmt, $res_productID, $res_subscribeID, $res_orderID, $res_pruductNum, $res_productClass, $res_productName, $res_productCost);
+        mysqli_stmt_bind_result($stmt, $res_pruductNum,  $res_productCost);
 
         $total_cost = 0;
         while(mysqli_stmt_fetch($stmt)) {
@@ -26,8 +26,12 @@
         
         $stmt = mysqli_prepare($con,"UPDATE `Order` SET `totalCost` = ? WHERE `orderID` = ? ");
         mysqli_stmt_bind_param($stmt,'ss',$total_cost, $order_id);
-        mysqli_stmt_execute($stmt);
-        echo "Update!";
+        if(mysqli_stmt_execute($stmt)){
+            echo "Update!";
+        } else {
+            echo "Update! Fail!";
+        }
+        mysqli_stmt_close($stmt);
         mysqli_close($con);
         header("Refresh: 1; url=updateorder.php");
     }
