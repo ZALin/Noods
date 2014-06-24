@@ -12,13 +12,16 @@
                     <link rel='stylesheet' type='text/css' href='css/admin.css'>
                 </head>
                 <body>
+                    <form action='logout.php' method='post'>
+                        <input type='submit' value='登出'>
+                    </form>
                     <div id='functions'>
                         <ul>
                           <li><a href='add-shop.php'>新增店家</a></li>
                           <li><a href='search.php'>查詢店家訂單</a></li>
-                          <li><a href='listall.php'>列出所有訂單</a></li>
-                          <li><a href='updateorder.php'>修改訂單</a></li>
-                          <li><a href='delorder.php'>刪除訂單</a></li>
+                          <li><a href='listall.php?func=list'>列出所有訂單</a></li>
+                          <li><a href='listall.php?func=modify'>修改訂單</a></li>
+                          <li><a href='listall.php?func=delete'>刪除訂單</a></li>
                         </ul>
                     </div>
                 </body>

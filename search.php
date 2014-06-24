@@ -17,7 +17,7 @@
                         
         echo "           <select name='shopName'>";
 
-        $stmt = mysqli_prepare($con,"SELECT DISTINCT shopName FROM Shop");
+        $stmt = mysqli_prepare($con,"SELECT `shopName` FROM `Shop`");
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $res_shopName);

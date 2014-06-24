@@ -9,10 +9,11 @@
                 <head>
                     <meta http-equiv='Content-Type' content='charset=utf-8'>
                     <title>Noods - User Page</title>
-                    <link rel='stylesheet' type='text/css' href='css/admin.css'>
+                    <link rel='stylesheet' type='text/css' href='css/user.css'>
                 </head>
                 <body>
                     <form action='logout.php' method='post'>
+                        <input type='submit' value='登出'>
                     </form>
                     <div id='functions'>
                         <ul>
