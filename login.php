@@ -4,7 +4,14 @@
     session_start();
     $_SESSION['access']=false;
 ?>
-
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <title>Now login...</title>
+    </head>
+    <body>
 <?php
     
     if($_POST['username']!=null && $_POST['password']!=null) {
@@ -20,8 +27,7 @@
 
 
         if(mysqli_stmt_num_rows($stmt)==1) {
-
-            echo "Welcome!!!" . "<br>" . "Redirecting... <br> ";
+            echo "<div class='hero-unit'> <div class='alert alert-success'> <h1>Welcome!!! $index_username </h1> <br> <h3>Redirecting...</h3></div></div>";
 
             $_SESSION['access']=true;
             while (mysqli_stmt_fetch($stmt)) {
@@ -39,7 +45,7 @@
             }
             
         } else {
-            echo "Password error.". "<br>" . "Redirecting...";
+            echo "<div class='hero-unit'>  <div class='alert alert-error'> <h1>Password Error!!!</h1> <br> <h3>Redirecting...</h3>  </div></div>";
             header('Refresh: 2; url=index.php');
         }
         
@@ -52,3 +58,5 @@
 
     mysqli_close($con);
 ?>
+</body>
+</html>
