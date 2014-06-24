@@ -9,12 +9,13 @@
         echo "ClassNameCost = new Array();";
         echo "NowSeletClass = 0;";
         echo "var class_count = 0;";
+        
+        // set ClassName & ClassNameCost
         $stmt = mysqli_prepare($con,"SELECT DISTINCT `productClass` FROM `Product` ORDER BY  `Product`.`productClass` ASC");
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $res_productClass);
         while(mysqli_stmt_fetch($stmt)) {
-            echo " console.log('".$res_productClass."');";
             $stmt2 = mysqli_prepare($con,"SELECT `productName`,`productCost` FROM `Product` WHERE productClass = ?");
             mysqli_stmt_bind_param($stmt2,'s',$res_productClass);
             mysqli_stmt_execute($stmt2);
@@ -23,12 +24,13 @@
             echo "ClassName[class_count] = new Array();";
             echo "ClassNameCost[class_count] = new Array();";
             while(mysqli_stmt_fetch($stmt2)) {
-                echo " console.log('".$res_productName."');";
                 echo "ClassName[class_count].push('".$res_productName."'); ";
                 echo "ClassNameCost[class_count].push('".$res_productCost."'); ";
             }
             echo "class_count++; ";
         }
+        
+        // chose new productClass reset productName's list 
         echo "function ReNewName(index){";
         echo "  var obj = document.getElementById('newform'); ";
         echo "  for(var i=0 ; i<ClassName[index].length ; i++)";
@@ -37,10 +39,14 @@
         echo "  NowSeletClass = index;";
         echo "  ReNewCost(0); ";
         echo "}";
+        
+        // chose new productName reset display Cost
         echo "function ReNewCost(index){";
         echo "  var obj = document.getElementById('newform'); ";
         echo "  obj.cost.value = ClassNameCost[NowSeletClass][index];";
         echo "}";
+        
+        // add new form
         echo "var first=true;";
         echo "function add_new_data() { ";
         echo "  if(first) {";
