@@ -1,5 +1,6 @@
 <?php
     include_once('config.php');
+    $upd_orderid=$_GET['id'];
 ?>
 
 <head>
@@ -86,27 +87,27 @@
         echo "      new_element.setAttribute('name','productName'); ";
         echo "      new_element.setAttribute('onChange','ReNewCost(this.selectedIndex);'); ";
         echo "      obj.appendChild(new_element); ";        
-        //echo "      new_element = document.createElement('input'); ";
         echo "      new_element = document.createElement('lable'); ";
         echo "      new_element.setAttribute('id','cost'); ";
         echo "      new_element.innerHTML = '0 NTD * '; ";
-        //echo "      new_element.setAttribute('readonly','readonly'); ";
-        //echo "      new_element.setAttribute('size','3'); ";
-        //echo "      new_element.setAttribute('value','0'); ";
         echo "      obj.appendChild(new_element); "; 
         echo "      new_element = document.createElement('input'); ";
         echo "      new_element.setAttribute('name','productNum'); ";
+        echo "      new_element.setAttribute('type','number'); ";
         echo "      new_element.setAttribute('value','0'); ";
         echo "      new_element.setAttribute('onChange','ReNewTotalCost();'); ";
         echo "      new_element.setAttribute('onKeyup','ReNewTotalCost();'); ";
         echo "      new_element.setAttribute('onMouseup','ReNewTotalCost();'); ";
         echo "      obj.appendChild(new_element); ";     
-        
         echo "      new_element = document.createElement('lable'); ";
         echo "      new_element.setAttribute('id','totalcost'); ";
         echo "      new_element.innerHTML = '= 0 NTD'; ";
         echo "      obj.appendChild(new_element); ";
-        
+        echo "      new_element = document.createElement('input');";
+        echo "      new_element.setAttribute('name','orderid'); ";
+        echo "      new_element.setAttribute('type','hidden');";
+        echo "      new_element.setAttribute('value','".$upd_orderid."');";
+        echo "      obj.appendChild(new_element);";
         echo "      new_element = document.createElement('input');";
         echo "      new_element.setAttribute('name','add'); ";
         echo "      new_element.setAttribute('type','submit');";
@@ -128,7 +129,7 @@
     session_start();
     
     if(isset($_SESSION['access']) && $_SESSION['access']==true) {
-        $upd_orderid=$_GET['id'];
+
         $stmt = mysqli_prepare($con,"SELECT * FROM `Order` WHERE `orderID` = ?");
         mysqli_stmt_bind_param($stmt,'s',$upd_orderid);
         mysqli_stmt_execute($stmt);
@@ -167,7 +168,7 @@
         //END list the order which been select 
 
         
-        $stmt = mysqli_prepare($con,"SELECT * FROM `Subscribe` NATURAL JOIN `Product` WHERE `orderID` = ?");
+        $stmt = mysqli_prepare($con,"SELECT * FROM `Subscribe` NATURAL JOIN `Product` WHERE `orderID` = ? ORDER BY  `Product`.`productClass` ASC ,  `Product`.`productName` ASC");
         mysqli_stmt_bind_param($stmt,'s',$upd_orderid);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
@@ -189,7 +190,7 @@
             echo "<td>".$res_productCost."</td>";
             echo "<td>
                     <form action='update-result.php' method='post'>
-                        <input type='text' value=".$res_pruductNum." name='num'>
+                        <input type='number' value=".$res_pruductNum." name='num'>
                         <input type='hidden' value=".$upd_orderid." name='oid'>
                         <input type='hidden' value=".$res_productID." name='pid'>
                         <input type='submit' value='修改'>
