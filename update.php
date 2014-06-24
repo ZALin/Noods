@@ -5,15 +5,51 @@
 <head>
 <?php
         echo "<script>";
+        echo "ClassName = new Array();";
+        echo "ClassNameCost = new Array();";
+        echo "NowSeletClass = 0;";
+        echo "var class_count = 0;";
+        $stmt = mysqli_prepare($con,"SELECT DISTINCT `productClass` FROM `Product` ORDER BY  `Product`.`productClass` ASC");
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+        mysqli_stmt_bind_result($stmt, $res_productClass);
+        while(mysqli_stmt_fetch($stmt)) {
+            echo " console.log('".$res_productClass."');";
+            $stmt2 = mysqli_prepare($con,"SELECT `productName`,`productCost` FROM `Product` WHERE productClass = ?");
+            mysqli_stmt_bind_param($stmt2,'s',$res_productClass);
+            mysqli_stmt_execute($stmt2);
+            mysqli_stmt_store_result($stmt2);
+            mysqli_stmt_bind_result($stmt2, $res_productName, $res_productCost);
+            echo "ClassName[class_count] = new Array();";
+            echo "ClassNameCost[class_count] = new Array();";
+            while(mysqli_stmt_fetch($stmt2)) {
+                echo " console.log('".$res_productName."');";
+                echo "ClassName[class_count].push('".$res_productName."'); ";
+                echo "ClassNameCost[class_count].push('".$res_productCost."'); ";
+            }
+            echo "class_count++; ";
+        }
+        echo "function ReNewName(index){";
+        echo "  var obj = document.getElementById('newform'); ";
+        echo "  for(var i=0 ; i<ClassName[index].length ; i++)";
+        echo "      obj.productName.options[i] = new Option( ClassName[index][i], ClassName[index][i] );";
+        echo "  obj.productName.length = ClassName[index].length;";
+        echo "  NowSeletClass = index;";
+        echo "  ReNewCost(0); ";
+        echo "}";
+        echo "function ReNewCost(index){";
+        echo "  var obj = document.getElementById('newform'); ";
+        echo "  obj.cost.value = ClassNameCost[NowSeletClass][index];";
+        echo "}";
         echo "var first=true;";
         echo "function add_new_data() { ";
         echo "  if(first) {";
         echo "      var obj = document.getElementById('newform'); ";
         echo "      new_element = document.createElement('select'); ";
         echo "      new_element.setAttribute('name','productClass'); ";
-        echo "      new_element.setAttribute('onChange','ReNew(this.selectedIndex);'); ";
+        echo "      new_element.setAttribute('onChange','ReNewName(this.selectedIndex);'); ";
         echo "      obj.appendChild(new_element); ";
-        $stmt = mysqli_prepare($con,"SELECT DISTINCT productClass FROM `Product`");
+        $stmt = mysqli_prepare($con,"SELECT DISTINCT `productClass` FROM `Product` ORDER BY  `Product`.`productClass` ASC");
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $res_productClass);
@@ -23,7 +59,14 @@
         }
         echo "      new_element = document.createElement('select'); ";
         echo "      new_element.setAttribute('name','productName'); ";
-        echo "      obj.appendChild(new_element); ";      
+        echo "      new_element.setAttribute('onChange','ReNewCost(this.selectedIndex);'); ";
+        echo "      obj.appendChild(new_element); ";        
+        echo "      new_element = document.createElement('input'); ";
+        echo "      new_element.setAttribute('name','cost'); ";
+        echo "      new_element.setAttribute('readonly','readonly'); ";
+        echo "      new_element.setAttribute('size','3'); ";
+        echo "      new_element.setAttribute('value','0'); ";
+        echo "      obj.appendChild(new_element); "; 
         echo "      new_element = document.createElement('input'); ";
         echo "      new_element.setAttribute('name','productNum'); ";
         echo "      obj.appendChild(new_element); ";      
@@ -32,6 +75,8 @@
         echo "      new_element.setAttribute('value','新增');";
         echo "      obj.appendChild(new_element);";
         echo "      first = false; ";
+        echo "      ReNewName(0); ";
+        echo "      ReNewCost(0); ";
         echo "  } ";
         echo "}";
         echo "</script> ";
@@ -104,9 +149,7 @@
             echo "</tr>";
         }      
         echo "</table><br>";
-        
-        
- 
+
         echo "<input type='submit' value='新增物品' onclick='add_new_data();'>";
         echo "<form id='newform' action='add-sub-result.php' method='post'>";
         echo "</form>";
