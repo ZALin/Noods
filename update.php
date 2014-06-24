@@ -196,6 +196,13 @@
                         <input type='submit' value='修改'>
                     </form>
                  </td>";
+            echo "<td>
+                    <form action='del-sub-result.php' method='post'>
+                        <input type='hidden' value=".$upd_orderid." name='oid'>
+                        <input type='hidden' value=".$res_productID." name='pid'>
+                        <input type='submit' value='刪除'>
+                    </form>
+                 </td>";
             echo "</tr>";
         }      
         echo "</table><br>";
