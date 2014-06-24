@@ -46,7 +46,7 @@
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $res_orderID ,$res_orderDate ,$res_shopID ,$res_totalCost);
 
-        echo "<table>";
+        echo "<table class='table table-striped'>";
         echo "<tr>";
         echo "<th>訂單ID</th>";
         echo "<th>訂單日期</th>";
