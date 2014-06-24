@@ -112,6 +112,7 @@
         echo "      new_element.setAttribute('name','add'); ";
         echo "      new_element.setAttribute('type','submit');";
         echo "      new_element.setAttribute('disabled','false');";
+        echo "      new_element.setAttribute('class','btn btn-primary');";
         echo "      new_element.setAttribute('value','新增');";
         echo "      obj.appendChild(new_element);";
         echo "      first = false; ";
@@ -121,15 +122,51 @@
         echo "}";
         echo "</script> ";
 ?>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<style>
+input[type='number']{
+    padding: 0px;
+    margin: 0px;
+    height:30px;
+}
+</style>
 </head>
 <body>
+
+
 <?php
 
     session_save_path('./session');
     session_start();
     
     if(isset($_SESSION['access']) && $_SESSION['access']==true) {
-
+        if($_SESSION['permission']=='admin') {
+            echo "<div class='navbar navbar-inverse'>
+                    <div class='navbar-inner'>
+                        <div class='container'>
+                            <a class='brand' href='admin.php'><i class='icon-play icon-white'></i>  Admin Home Page</a>                                
+                            <div class='nav-collapse collapse'>
+                                <form action='logout.php' method='post' class='navbar-form pull-right'>
+                                    <input class='btn' type='submit' value='登出'>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+        } else {
+            echo " <div class='navbar'>
+                    <div class='navbar-inner'>
+                        <div class='container'>
+                            <a class='brand' href='user.php'><i class='icon-play'></i>  User Home Page</a>                                
+                            <div class='nav-collapse collapse'>
+                                <form action='logout.php' method='post' class='navbar-form pull-right'>
+                                    <input class='btn btn-inverse' type='submit' value='登出'>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+        }
         $stmt = mysqli_prepare($con,"SELECT * FROM `Order` WHERE `orderID` = ?");
         mysqli_stmt_bind_param($stmt,'s',$upd_orderid);
         mysqli_stmt_execute($stmt);
@@ -137,7 +174,7 @@
         mysqli_stmt_bind_result($stmt, $res_orderID ,$res_orderDate ,$res_shopID ,$res_totalCost);
 
         //list the order which been select
-        echo "<table>";
+        echo "<table class='table table-striped'>";
         echo "<tr>";
         if($_SESSION['permission']=='admin') {
             echo "<th colspan=4>";
@@ -175,12 +212,13 @@
         mysqli_stmt_bind_result($stmt, $res_productID, $res_subscribeID, $res_orderID, $res_pruductNum, $res_productClass, $res_productName, $res_productCost);
 
         // `Subscribe` should not have subscribeID in our design
-        echo "<table id='updatetable'>";
+        echo "<table id='updatetable' class='table table-bordered' width='200'>";
         echo "<tr>";
         echo "<th>類別</th>"; 
         echo "<th>名稱</th>";
         echo "<th>單價</th>";
         echo "<th>數量</th>";
+        echo "<th>刪除</th>";
         echo "</tr>";
         echo "<tr>";
         while(mysqli_stmt_fetch($stmt)) {
@@ -190,32 +228,33 @@
             echo "<td>".$res_productCost."</td>";
             echo "<td>
                     <form action='update-result.php' method='post'>
-                        <input type='number' value=".$res_pruductNum." name='num'>
+                        <input type='number' class='input-medium' value=".$res_pruductNum." name='num'>
                         <input type='hidden' value=".$upd_orderid." name='oid'>
                         <input type='hidden' value=".$res_productID." name='pid'>
-                        <input type='submit' value='修改'>
+                        <input type='submit' class='btn btn-primary' value='修改'>
                     </form>
                  </td>";
             echo "<td>
                     <form action='del-sub-result.php' method='post'>
                         <input type='hidden' value=".$upd_orderid." name='oid'>
                         <input type='hidden' value=".$res_productID." name='pid'>
-                        <input type='submit' value='刪除'>
+                        <input type='submit' class='btn btn-primary' value='刪除'>
                     </form>
                  </td>";
             echo "</tr>";
         }      
         echo "</table><br>";
 
-        echo "<input type='submit' value='新增物品' onclick='add_new_data();'>";
+        echo "<input type='submit' value='新增物品' class='btn btn-primary' onclick='add_new_data();'>";
         echo "<form id='newform' action='add-sub-result.php' method='post'>";
         echo "</form>";
         
+        /*
         if($_SESSION['permission']=='admin') {
             echo "<a href='admin.php'>back to main page</a>";
         } else {
             echo "<a href='user.php'>back to main page</a>";
-        }
+        }*/
 
         mysqli_stmt_close($stmt);
         mysqli_close($con);

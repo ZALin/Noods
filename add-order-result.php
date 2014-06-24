@@ -2,7 +2,16 @@
     include_once('config.php');
     session_save_path('./session');
     session_start();
-    
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <title>Now login...</title>
+    </head>
+    <body>
+<?php    
     if(isset($_SESSION['permission']) && $_SESSION['permission']=='user' && isset($_SESSION['access']) && $_SESSION['access']==true) {
         $add_orderdate=$_POST['orderDate'];
         $add_date=explode("-", $add_orderdate);
@@ -38,11 +47,11 @@
 
         if(mysqli_stmt_execute($stmt)) {
 
-            echo $add_orderid . " 已經成功加入資料庫 !!<br>Redirecting...";
+            echo "<div class='alert alert-success'> ".$add_orderid . " 已經成功加入資料庫 !!<br>Redirecting...</div>";
 
         } else {
 
-            echo "Something Wrong!!<br>Redirecting...";
+            echo "<div class='alert alert-info'>Something Wrong!!<br>Redirecting...</div>";
 
         }
         
@@ -51,8 +60,15 @@
         mysqli_close($con);
     }
     else{
-        echo "You shall not pass!";
+        echo "<html>
+                <head>
+                    <title>Error</title>
+                    <link href='css/bootstrap.min.css' rel='stylesheet' media='screen'>
+                </head>
+                <body><div class='alert alert-error'> <h1>You shall not pass!</h1></div></body></html>";
         mysqli_close($con);
         header('Refresh: 2; url=index.php');
     }
 ?>
+</body>
+</html>

@@ -7,12 +7,24 @@
     </head>
     <body>
     
-            <form action='login.php' method='post'>
-                <label> 帳號: </label>
-                <input type='text' name='username' id='username' placeholder='username'><br>
-                <label> 密碼: </label>
-                <input type='password' name='password' id='password' placeholder='password'><br>
-                <input type='submit' value='登入'>
+            <form action='login.php' method='post' class='form-horizontal'>
+                <div class="control-group">
+                    <label class="control-label" for="username"> 帳號: </label>
+                    <div class="controls">
+                        <input type='text' name='username' id='username' placeholder='username'><br>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="password"> 密碼: </label>
+                    <div class="controls">
+                        <input type='password' name='password' id='password' placeholder='password'><br>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <input type='submit' class='btn btn-primary' value='登入'>
+                    </div>
+                </div>
             </form>
         
     </body>

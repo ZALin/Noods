@@ -2,7 +2,15 @@
     include_once('config.php');
     session_save_path('./session');
     session_start();
-    
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    </head>
+    <body>
+<?php        
     if(isset($_SESSION['access']) && $_SESSION['access']==true) {
         $order_id=$_POST['oid'];
         $product_id=$_POST['pid'];
@@ -35,9 +43,9 @@
         mysqli_stmt_bind_param($stmt,'ss',$total_cost, $order_id);
         $upd_2=mysqli_stmt_execute($stmt);
         if($upd_1 && $upd_2){
-            echo "Update!";
+            echo "<div class='alert alert-success'> Update!</div>";
         } else {
-            echo "Update! Fail!";
+            echo "<div class='alert alert-info'> Update! Fail! </div>";
         }
         mysqli_stmt_close($stmt);
         mysqli_close($con);
@@ -53,3 +61,7 @@
 
 
 ?>
+
+
+</body>
+</html>
