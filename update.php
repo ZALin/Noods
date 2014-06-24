@@ -8,6 +8,7 @@
         echo "ClassName = new Array();";
         echo "ClassNameCost = new Array();";
         echo "NowSeletClass = 0;";
+        echo "NowOneCost = 0;";
         echo "var class_count = 0;";
         
         // set ClassName & ClassNameCost
@@ -42,9 +43,27 @@
         
         // chose new productName reset display Cost
         echo "function ReNewCost(index){";
-        echo "  var obj = document.getElementById('newform'); ";
-        echo "  obj.cost.value = ClassNameCost[NowSeletClass][index];";
+        echo "  var obj = document.getElementById('cost'); ";
+        echo "  obj.innerHTML = ClassNameCost[NowSeletClass][index] + ' NTD * ';";
+        echo "  NowOneCost = ClassNameCost[NowSeletClass][index];";
+        echo "  ReNewTotalCost();";
         echo "}";
+        
+        // reset display TotalCost
+        echo "function ReNewTotalCost(){";
+        echo "  var form = document.getElementById('newform'); ";
+        echo "  var num = form.productNum.value;";
+        echo "  var obj = document.getElementById('totalcost'); ";
+        echo "  var totalcost = num*NowOneCost; ";
+        echo "  obj.innerHTML = '= ' + totalcost + ' NTD';";
+        echo "  if(totalcost == 0){";
+        echo "      form.add.disabled = true; ";
+        echo "  } ";
+        echo "  else{ ";
+        echo "      form.add.disabled = false;";
+        echo "  }";
+        echo "}";
+        
         
         // add new form
         echo "var first=true;";
@@ -67,17 +86,31 @@
         echo "      new_element.setAttribute('name','productName'); ";
         echo "      new_element.setAttribute('onChange','ReNewCost(this.selectedIndex);'); ";
         echo "      obj.appendChild(new_element); ";        
-        echo "      new_element = document.createElement('input'); ";
-        echo "      new_element.setAttribute('name','cost'); ";
-        echo "      new_element.setAttribute('readonly','readonly'); ";
-        echo "      new_element.setAttribute('size','3'); ";
-        echo "      new_element.setAttribute('value','0'); ";
+        //echo "      new_element = document.createElement('input'); ";
+        echo "      new_element = document.createElement('lable'); ";
+        echo "      new_element.setAttribute('id','cost'); ";
+        echo "      new_element.innerHTML = '0 NTD * '; ";
+        //echo "      new_element.setAttribute('readonly','readonly'); ";
+        //echo "      new_element.setAttribute('size','3'); ";
+        //echo "      new_element.setAttribute('value','0'); ";
         echo "      obj.appendChild(new_element); "; 
         echo "      new_element = document.createElement('input'); ";
         echo "      new_element.setAttribute('name','productNum'); ";
-        echo "      obj.appendChild(new_element); ";      
+        echo "      new_element.setAttribute('value','0'); ";
+        echo "      new_element.setAttribute('onChange','ReNewTotalCost();'); ";
+        echo "      new_element.setAttribute('onKeyup','ReNewTotalCost();'); ";
+        echo "      new_element.setAttribute('onMouseup','ReNewTotalCost();'); ";
+        echo "      obj.appendChild(new_element); ";     
+        
+        echo "      new_element = document.createElement('lable'); ";
+        echo "      new_element.setAttribute('id','totalcost'); ";
+        echo "      new_element.innerHTML = '= 0 NTD'; ";
+        echo "      obj.appendChild(new_element); ";
+        
         echo "      new_element = document.createElement('input');";
+        echo "      new_element.setAttribute('name','add'); ";
         echo "      new_element.setAttribute('type','submit');";
+        echo "      new_element.setAttribute('disabled','false');";
         echo "      new_element.setAttribute('value','新增');";
         echo "      obj.appendChild(new_element);";
         echo "      first = false; ";
