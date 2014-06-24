@@ -46,6 +46,7 @@
                         ?>
                         slast=pad(slast,2);
                         var idstring=[sid,smid,slast].join('-');
+                        $('#datelabel').val(phpdate);
                         $('#idlabel').val(idstring);
                     });
 
@@ -57,6 +58,7 @@
                 <p>Date: <input type='text' id='datepicker'> </p>
                 <form action='add-order-result.php' method='post'>
                     <input id='idlabel' name='orderID' type='hidden'></input><br>
+                    <input id='datelabel' name='orderDate' type='hidden'></input><br>
                     <input type='submit' value='新增'>
                 </form>
             </body>
