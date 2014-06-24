@@ -12,7 +12,7 @@
         $index_username=$_POST['username'];
         $index_password=$_POST['password'];
 
-        $stmt = mysqli_prepare($con,'SELECT * FROM Users WHERE username = ? AND password = ?');
+        $stmt = mysqli_prepare($con,'SELECT * FROM `Users` WHERE `username` = ? AND `password` = ?');
         mysqli_stmt_bind_param($stmt,'ss',$index_username,$index_password);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);

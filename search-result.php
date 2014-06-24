@@ -13,12 +13,12 @@
 
         echo "<table>";
         echo "<tr>";
-        echo "<td>訂單ID</td>";
-        echo "<td>訂單日期</td>";
+        echo "<th>訂單ID</th>";
+        echo "<th>訂單日期</th>";
         if($_SESSION['admin']==true) {
-            echo "<td>shopID</td>";
+            echo "<th>shopID</th>";
         }
-        echo "<td>總金額</td>";
+        echo "<th>總金額</th>";
         echo "</tr>";
         while(mysqli_stmt_fetch($stmt)) {
 

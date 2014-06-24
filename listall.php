@@ -20,17 +20,17 @@
 
         echo "<table>";
         echo "<tr>";
-        echo "<td>訂單ID</td>";
-        echo "<td>訂單日期</td>";
+        echo "<th>訂單ID</th>";
+        echo "<th>訂單日期</th>";
         if($_SESSION['permission'] == 'admin') {
-            echo "<td>shopID</td>";
+            echo "<th>shopID</th>";
         }
-        echo "<td>總金額</td>";
+        echo "<th>總金額</th>";
         if($_GET['func'] == 'modify') {
-            echo "<td>修改</td>";
+            echo "<th>修改</th>";
         }
         if($_GET['func'] == 'delete') {
-            echo "<td>刪除</td>";
+            echo "<th>刪除</th>";
         }
         echo "</tr>";
         while(mysqli_stmt_fetch($stmt)) {
