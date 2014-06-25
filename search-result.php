@@ -39,6 +39,7 @@
                     </div>
                 </div>";
         }
+
         $search_shopName=$_POST['shopName'];
         $stmt = mysqli_prepare($con,"SELECT `Order`.* FROM `Order` NATURAL JOIN `Shop` WHERE `shopName` = ?");
         mysqli_stmt_bind_param($stmt,'s',$search_shopName);
@@ -82,7 +83,8 @@
                     <title>Error</title>
                     <link href='css/bootstrap.min.css' rel='stylesheet' media='screen'>
                 </head>
-                <body><div class='alert alert-error'> <h1>You shall not pass!</h1></div></body></html>";
+                <body><div class='alert alert-error'> <h1>You shall not pass!</h1></div></body>
+              </html>";
         mysqli_close($con);
         header('Refresh: 2; url=index.php');
     }
