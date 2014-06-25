@@ -50,7 +50,7 @@
         echo "<tr>";
         echo "<th>訂單ID</th>";
         echo "<th>訂單日期</th>";
-        if($_SESSION['admin']==true) {
+        if($_SESSION['permission']=='admin') {
             echo "<th>shopID</th>";
         }
         echo "<th>總金額</th>";
@@ -60,7 +60,7 @@
             echo "<tr>";
             echo "<td>".$res_orderID."</td>";
             echo "<td>".$res_orderDate."</td>";
-            if($_SESSION['admin']==true) {
+            if($_SESSION['permission']=='admin') {
                 echo "<td>".$res_shopID."</td>";
             }
             echo "<td>".$res_totalCost."</td>";

@@ -3,3 +3,7 @@
     top: 40%;
     left: 30%;
 }
+body {
+    background-image: url('../img/index_bg.jpg');
+    background-repeat:repeat;
+}
