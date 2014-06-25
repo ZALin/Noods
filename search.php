@@ -40,7 +40,7 @@ if($_SESSION['permission']=='admin') {
             </div>
         </div>";
 } 
-        echo "<form class='form-horizontal' action='search-result.php' method='post
+        echo "<form class='form-horizontal' action='search-result.php' method='post'>
                 <div class='control-group'>
                         <label class='control-label' for='shopName'> 店名： </label>";
                         
