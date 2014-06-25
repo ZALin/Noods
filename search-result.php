@@ -41,13 +41,9 @@
                     </div>
                 </div>";
         }
-<<<<<<< HEAD
 
         $search_shopName=$_POST['shopName'];
-=======
         
-        
->>>>>>> zal/master
         $stmt = mysqli_prepare($con,"SELECT `Order`.* FROM `Order` NATURAL JOIN `Shop` WHERE `shopName` = ?");
         mysqli_stmt_bind_param($stmt,'s',$search_shopName);
         mysqli_stmt_execute($stmt);
