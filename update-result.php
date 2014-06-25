@@ -52,7 +52,12 @@
         header("Refresh: 1; url=update.php?id=".$order_id);
     }
     else{
-        echo "You shall not pass!";
+        echo "<html>
+                <head>
+                    <title>Error</title>
+                    <link href='css/bootstrap.min.css' rel='stylesheet' media='screen'>
+                </head>
+                <body><div class='alert alert-error'> <h1>You shall not pass!</h1></div></body></html>";
         mysqli_close($con);
         header('Refresh: 3; url=index.php');
     }

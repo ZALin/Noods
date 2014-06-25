@@ -10,8 +10,10 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     </head>
     <body>
+
 <?php   
     if(isset($_SESSION['access']) && $_SESSION['access']==true) {
+        $search_shopName=$_POST['shopName'];
         if($_SESSION['permission']=='admin') {
             echo "<div class='navbar navbar-inverse'>
                     <div class='navbar-inner'>
@@ -39,15 +41,20 @@
                     </div>
                 </div>";
         }
+<<<<<<< HEAD
 
         $search_shopName=$_POST['shopName'];
+=======
+        
+        
+>>>>>>> zal/master
         $stmt = mysqli_prepare($con,"SELECT `Order`.* FROM `Order` NATURAL JOIN `Shop` WHERE `shopName` = ?");
         mysqli_stmt_bind_param($stmt,'s',$search_shopName);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
         mysqli_stmt_bind_result($stmt, $res_orderID ,$res_orderDate ,$res_shopID ,$res_totalCost);
 
-        echo "<table>";
+        echo "<table class='table table-striped'>";
         echo "<tr>";
         echo "<th>訂單ID</th>";
         echo "<th>訂單日期</th>";
