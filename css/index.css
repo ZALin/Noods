@@ -1,9 +1,19 @@
 ﻿#loginpanel {
     position: absolute;
     top: 40%;
-    left: 30%;
+    left: 38%;
 }
+
 body {
     background-image: url('../img/index_bg.jpg');
     background-repeat:repeat;
+    
+}
+
+label {
+
+    font-size:30px;
+    font-weight: bold;
+    color:white;
+    width:80px;
 }
